@@ -20,3 +20,5 @@ function formatNumber(value: number): string {
 }
 
 export default formatSize;
+
+export const generateUUID = () => crypto.randomUUID();
