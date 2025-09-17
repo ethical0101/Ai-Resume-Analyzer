@@ -1,6 +1,15 @@
 // Utility to format a byte count into a human-readable string in KB, MB, or GB
 // Uses base 1024. Values are rounded to at most 2 decimal places.
-export function formatSize(bytes: number): string {
+
+import {twMerge} from "tailwind-merge";
+import {type ClassValue, clsx} from "clsx";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+
+export function utils(bytes: number): string {
   if (!Number.isFinite(bytes) || bytes <= 0) return "0 KB";
 
   const kb = bytes / 1024;
@@ -19,6 +28,8 @@ function formatNumber(value: number): string {
   return s.replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
 }
 
-export default formatSize;
+export default utils;
 
 export const generateUUID = () => crypto.randomUUID();
+
+
