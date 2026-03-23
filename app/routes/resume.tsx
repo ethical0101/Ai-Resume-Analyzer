@@ -47,15 +47,7 @@ const Resume = () => {
             const imageUrl = URL.createObjectURL(imgBlob);
             setImageUrl(imageUrl);
 
-            console.log("Image URl = ",imageUrl);
-
             setFeedback(data.feedback);
-
-            console.log({
-                resumeUrl,
-                imageUrl,
-                feedback : data.feedback
-            })
 
         }
 
@@ -100,6 +92,7 @@ const Resume = () => {
                     ) : (
                         <img
                             src="/images/resume-scan-2.gif"
+                            alt="Generating resume feedback"
                             className="w-full"
                         />
                     )}

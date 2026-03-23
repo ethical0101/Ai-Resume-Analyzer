@@ -40,8 +40,6 @@ export default function Home() {
             }
           })
           .filter((r): r is Resume => !!r && typeof r.id === "string");
-
-        console.log("parsedResumes", parsedResumes);
         setResumes(parsedResumes);
       } catch (e) {
         console.error("Failed to load resumes", e);
@@ -74,7 +72,7 @@ export default function Home() {
       {loadingResumes && (
           <div className='flex flex-col items-center justify-center'>
             <img
-              src="/images/resume-scan-2.gif" className='w-[200px]'
+              src="/images/resume-scan-2.gif" alt='Loading resumes' className='w-[200px]'
             />
           </div>
       )}
