@@ -1,0 +1,495 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+
+\geometry{left=1in,right=1in,top=1in,bottom=1in}
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={SCM Project Report - AI Resume Analyzer (Resumind)},
+    pdfauthor={Kommi Druthendra, Pothuru Jaswanth, Kaswibhatala Navyatha Simha}
+}
+
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{210,210,210}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{codeframe},
+    breaklines=true,
+    captionpos=b,
+    showstringspaces=false,
+    tabsize=2
+}
+
+\begin{document}
+
+% -----------------------
+% Title Page
+% -----------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.2cm}
+
+    {\LARGE \textbf{Software Configuration Management Project Report} \par}
+    \vspace{1.2cm}
+
+    {\Huge \textbf{AI Resume Analyzer (Resumind)} \par}
+    \vspace{1.5cm}
+
+    {\Large \textbf{Team Members} \par}
+    \vspace{0.4cm}
+    {\large
+    Kommi Druthendra (Reg No: 23MIS0213) \\
+    Pothuru Jaswanth (Reg No: 23MIS0178) \\
+    Kaswibhatala Navyatha Simha (Reg No: 23MIS0242)
+    \par}
+
+    \vspace{1.2cm}
+    {\Large \textbf{Faculty} \par}
+    \vspace{0.4cm}
+    {\large
+    Santhi K \\
+    Assistant Professor Grade 2
+    \par}
+
+    \vspace{1.2cm}
+    {\Large \textbf{Department} \par}
+    \vspace{0.4cm}
+    {\large SCORE \par}
+
+    \vfill
+
+    {\large Academic Year: 2025--2026 \par}
+    \vspace{0.5cm}
+    {\large Date of Submission: \today \par}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+
+% -----------------------
+\chapter{Abstract}
+The AI Resume Analyzer, named \textit{Resumind}, is a web-based intelligent application that evaluates candidate resumes against a target job profile. The system accepts resume files in PDF format, extracts relevant content, and applies AI-driven analysis to generate structured feedback across multiple dimensions such as content quality, skills alignment, tone, structure, and ATS (Applicant Tracking System) compatibility. In addition to an overall score, the platform provides actionable recommendations to improve employability and resume relevance.
+
+From a Software Configuration Management (SCM) perspective, this project demonstrates a practical and complete workflow that combines source code versioning, collaborative development, continuous integration, and automated deployment. Git and GitHub were used to maintain source history, manage branches, review changes, and coordinate team contributions. TeamCity was integrated as the Continuous Integration (CI) platform to automate build validation on every code update. Vercel was used as the deployment platform to automatically publish validated builds.
+
+The project establishes how SCM practices improve quality, traceability, and delivery confidence in modern web development. It also highlights how CI/CD pipelines support early error detection and faster iteration cycles for academic and industry-grade software systems.
+
+% -----------------------
+\chapter{Introduction}
+\section{What is Software Configuration Management (SCM)}
+Software Configuration Management (SCM) is a disciplined process used to control, organize, and track software artifacts throughout the development lifecycle. These artifacts include source code, documentation, build scripts, configurations, test files, and deployment definitions. SCM ensures that every change is identifiable, reproducible, and auditable.
+
+Core SCM activities include version control, baseline management, change tracking, branching strategies, release tagging, and rollback support. SCM provides a structured mechanism to answer important engineering questions such as:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Who changed the code?
+    \item What exactly changed?
+    \item Why was the change made?
+    \item Which version is currently in production?
+\end{itemize}
+
+\section{Importance of SCM in Modern Software Development}
+Modern software projects are collaborative, fast-moving, and often distributed across multiple contributors and platforms. Without SCM, teams face risks such as overwritten code, inconsistent environments, unclear change ownership, and unstable releases.
+
+SCM is critical because it provides:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Traceability:} Every change is recorded with time, author, and message.
+    \item \textbf{Collaboration support:} Multiple developers can work in parallel using branches.
+    \item \textbf{Reliability:} Stable baselines and tagged versions reduce release risk.
+    \item \textbf{Recoverability:} Teams can revert to known-good versions if failures occur.
+    \item \textbf{Process integration:} SCM integrates naturally with CI/CD tools for automation.
+\end{itemize}
+
+\section{Overview of the Project}
+The AI Resume Analyzer (Resumind) is built using React, TypeScript, and Vite on the frontend, with platform-level backend services consumed through Puter.js. The application enables users to upload resumes, provide job descriptions, and receive intelligent feedback and ATS scoring.
+
+This project was selected for SCM study because it includes real-world components: collaborative coding, multiple modules, external service integration, build automation, and cloud deployment. The team implemented complete SCM practices from repository creation to automated build and deployment pipelines.
+
+% -----------------------
+\chapter{Project Description}
+\section{Functional Overview}
+Resumind is designed to reduce the effort required for resume optimization. Instead of manually checking resume quality, users can obtain AI-generated insights aligned with a specific role.
+
+\section{Resume Upload (PDF)}
+Users upload a PDF resume through a drag-and-drop interface. The application performs client-side validation (such as file type and size checks) and creates a preview for user convenience. This improves usability and ensures only valid inputs enter the analysis flow.
+
+\section{AI-Based Analysis Using Job Description}
+The system asks users to provide role context, including job title, company, and job description. This context is used to tailor AI analysis so feedback is job-specific rather than generic. The analysis engine evaluates resume relevance, keyword alignment, skill coverage, and presentation quality.
+
+\section{ATS Score and Feedback}
+A dedicated ATS score is generated to estimate compatibility with automated applicant filtering systems. Alongside scoring, the system returns category-based suggestions, often split into:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Positive elements already present in the resume.
+    \item Improvement recommendations for missing or weak areas.
+\end{itemize}
+
+\section{Use of Puter.js (Auth, KV, FS, AI)}
+The project uses Puter.js to simplify backend service consumption:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Auth:} User login and session handling.
+    \item \textbf{KV:} Key-value data storage for metadata and analysis results.
+    \item \textbf{FS:} File storage and retrieval for resume assets.
+    \item \textbf{AI:} AI chat/analysis APIs used for structured resume feedback.
+\end{itemize}
+
+\section{React + TypeScript + Vite Architecture}
+The frontend follows a component-based architecture with route-level separation:
+\begin{itemize}[leftmargin=1.2cm]
+    \item React for UI composition.
+    \item TypeScript for static typing and maintainability.
+    \item Vite for fast development server startup and optimized builds.
+\end{itemize}
+
+\section{UI Features and Workflow}
+The interface provides:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Upload forms for resume and role details.
+    \item Visual score indicators (overall and ATS).
+    \item Accordion-based detailed feedback sections.
+    \item Resume history listing and retrieval.
+\end{itemize}
+
+Typical user workflow:
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Authenticate.
+    \item Upload resume and enter job details.
+    \item Trigger analysis.
+    \item View scores and recommendations.
+    \item Iterate by improving resume and reanalyzing.
+\end{enumerate}
+
+% -----------------------
+\chapter{System Architecture}
+\section{Architecture Components}
+The system can be viewed as a layered architecture where the frontend orchestrates interactions with managed backend services exposed by Puter.js.
+
+\subsection{Frontend Layer (React + Vite)}
+This layer handles user interaction, routing, form inputs, rendering of scores, and feedback views. It also includes utility logic for PDF preview generation.
+
+\subsection{Backend Services via Puter.js}
+Instead of a custom server implementation, backend capabilities are accessed through Puter.js SDK abstractions. This reduces infrastructure complexity while preserving key backend functions.
+
+\subsection{Data Storage (KV Store)}
+Resume metadata and analysis outputs are stored in key-value format. Each analysis session is associated with a unique key, enabling retrieval and history display.
+
+\subsection{AI Processing Pipeline}
+The AI pipeline follows this sequence:
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Collect user resume and job description context.
+    \item Build an instruction prompt with expected response structure.
+    \item Submit content to AI analysis service.
+    \item Parse structured response.
+    \item Store and display categorized feedback.
+\end{enumerate}
+
+\section{Architecture Diagram (Placeholder)}
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox[c][7cm][c]{0.9\textwidth}{
+    \centering
+    \textbf{Architecture Diagram Placeholder}\\[0.3cm]
+    Include a block diagram showing:\\
+    User Browser $\rightarrow$ React+Vite Frontend $\rightarrow$ Puter.js Services\\
+    (Auth, FS, KV, AI) $\rightarrow$ Result Rendering and Storage.
+    }}
+    \caption{High-level system architecture of AI Resume Analyzer (Resumind)}
+    \label{fig:architecture}
+\end{figure}
+
+% -----------------------
+\chapter{SCM Tools Used}
+\section{Git and GitHub as Primary SCM Tools}
+The project uses Git as the distributed version control system and GitHub as the cloud-hosted collaboration platform. Git enables complete change history management, while GitHub provides repository hosting, branch visibility, commit browsing, and team-level collaboration.
+
+\section{Version Control Concepts Applied}
+\subsection{Repository}
+A central repository was created to maintain the complete source code and project artifacts. Team members cloned the same repository to maintain consistency.
+
+\subsection{Commits}
+Code modifications were saved incrementally with meaningful commit messages. This made progress traceable and reduced debugging effort by isolating change units.
+
+\subsection{Branching}
+Feature branches were used to implement isolated tasks such as UI improvements, upload logic enhancements, and scoring component updates. Branching reduced integration conflicts and enabled safer experimentation.
+
+\subsection{Merging}
+After validation, feature branches were merged into the main branch. Merge operations were used to integrate stable work while preserving branch history.
+
+\section{Why GitHub Was Chosen}
+GitHub was selected due to:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Strong integration with CI/CD platforms.
+    \item Widely adopted workflow standards in academia and industry.
+    \item Excellent collaboration support for teams.
+    \item Clear web interface for commit and branch tracking.
+    \item Easy integration with Vercel for deployment automation.
+\end{itemize}
+
+% -----------------------
+\chapter{CI/CD Tool Used}
+\section{JetBrains TeamCity as the CI Tool}
+JetBrains TeamCity was used as the CI system to automate build validation. TeamCity monitors repository changes and executes configured build steps in a controlled environment.
+
+\section{What is CI/CD}
+\textbf{Continuous Integration (CI)} is the practice of frequently integrating code changes into a shared repository, followed by automated builds and tests.
+
+\textbf{Continuous Delivery/Deployment (CD)} extends CI by preparing and/or releasing validated builds to runtime environments with minimal manual effort.
+
+\section{Difference Between SCM and CI/CD}
+\begin{table}[H]
+\centering
+\caption{SCM vs CI/CD}
+\begin{tabular}{p{0.28\textwidth} p{0.32\textwidth} p{0.32\textwidth}}
+\toprule
+\textbf{Aspect} & \textbf{SCM} & \textbf{CI/CD} \\
+\midrule
+Primary purpose & Manage and track code/configuration changes & Automate build, test, and delivery pipeline \\
+Focus area & Version history, branching, merging, baselines & Integration validation and release automation \\
+Core tools in this project & Git, GitHub & TeamCity, Vercel \\
+When it operates & During all coding activities & Triggered on commits/pushes and release events \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% -----------------------
+\chapter{TeamCity Integration (Step-by-Step)}
+\section{Introduction}
+This section presents a complete beginner-friendly procedure to integrate TeamCity with the project repository and automate build verification.
+
+\section{Installation of TeamCity on Windows}
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Download TeamCity Professional Edition from the official JetBrains website.
+    \item Run the installer and follow setup instructions.
+    \item Choose installation directory and data directory.
+    \item Ensure TeamCity Server service is enabled.
+    \item Start TeamCity service after installation.
+\end{enumerate}
+
+\section{Accessing TeamCity via localhost:8111}
+After installation, TeamCity server is available at:
+\begin{lstlisting}[language=bash,caption={Local TeamCity URL}]
+http://localhost:8111
+\end{lstlisting}
+First-time setup includes creating an administrator account and selecting default server settings.
+
+\section{Creating a New Project in TeamCity}
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Log in to TeamCity.
+    \item Click \textbf{Create Project}.
+    \item Select \textbf{From Repository URL} option.
+    \item Provide repository details and proceed.
+\end{enumerate}
+
+\section{Connecting GitHub Repository Using Any Git URL}
+In the \textbf{VCS Root} configuration:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Select \textbf{Any Git URL}.
+    \item Enter repository clone URL.
+    \item For public repository access, choose \textbf{Anonymous} authentication.
+    \item Set \textbf{Default branch} to \texttt{main}.
+\end{itemize}
+
+\section{Build Configuration}
+\subsection{Creating a Build Configuration}
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Create a build configuration under the project.
+    \item Name it, for example, \textit{Resumind-Build}.
+    \item Attach the previously configured VCS root.
+\end{enumerate}
+
+\subsection{Adding Build Steps Manually}
+Although TeamCity may detect Docker files automatically, this project used a direct Node-based build strategy. Docker auto-detection was intentionally ignored for simplicity.
+
+\subsection{Command Line Build Step}
+Add a \textbf{Command Line} build step with custom script:
+\begin{lstlisting}[language=bash,caption={TeamCity Build Script}]
+npm install
+npm run build
+\end{lstlisting}
+
+Explanation of each command:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \texttt{npm install}: Downloads and installs all dependencies from \texttt{package.json}. This ensures the build agent has required packages.
+    \item \texttt{npm run build}: Executes the production build script (in this project, React Router/Vite build process) to compile and bundle the application.
+\end{itemize}
+
+\section{Triggers}
+\subsection{Adding VCS Trigger}
+To automate builds:
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Open build configuration settings.
+    \item Go to \textbf{Triggers}.
+    \item Add \textbf{VCS Trigger}.
+    \item Configure it to monitor \texttt{main} branch changes.
+\end{enumerate}
+
+\subsection{How Automatic Builds are Triggered on Push}
+When a developer pushes commits to GitHub:
+\begin{enumerate}[leftmargin=1.2cm]
+    \item TeamCity detects repository updates through VCS polling/hooks.
+    \item A new build is queued automatically.
+    \item Build steps execute on the build agent.
+    \item Build status is recorded as success or failure.
+\end{enumerate}
+
+\section{Build Execution}
+\subsection{Running the First Build}
+The first build was started manually to validate setup correctness.
+
+\subsection{Viewing Build Logs}
+TeamCity provides detailed logs for each step, including dependency installation progress and build output. Logs were used to identify missing package errors or syntax failures.
+
+\subsection{Understanding Success and Failure States}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Success:} All steps complete with exit code 0.
+    \item \textbf{Failure:} Any step exits with non-zero status (for example, TypeScript syntax error).
+\end{itemize}
+
+\section{Demonstration Scenario}
+\subsection{Successful Build}
+A commit with valid code triggered TeamCity and produced a successful build, confirming proper dependency installation and application compilation.
+
+\subsection{Failed Build Due to Syntax Error}
+A deliberate syntax issue was introduced in source code and pushed. TeamCity correctly failed the build, proving the CI gate was effective.
+
+\subsection{Fix and Rebuild}
+After correcting the syntax issue and pushing the fix, TeamCity automatically triggered a new build and returned to success state.
+
+% -----------------------
+\chapter{Deployment}
+\section{Deployment Using Vercel}
+Vercel was chosen as the deployment platform because it provides seamless integration with modern frontend frameworks and supports automatic deployments from Git repositories.
+
+\section{Integration with GitHub}
+The GitHub repository was connected to Vercel once. Vercel then tracked repository updates and created deployment previews/production updates accordingly.
+
+\section{Automatic Deployment After Push}
+When changes are merged into the main branch:
+\begin{enumerate}[leftmargin=1.2cm]
+    \item GitHub receives push.
+    \item Vercel webhook triggers a deployment.
+    \item Build and hosting steps run automatically.
+    \item Updated application is published to the live URL.
+\end{enumerate}
+
+% -----------------------
+\chapter{Workflow (End-to-End Flow)}
+\section{Pipeline Overview}
+The complete development and delivery flow is:
+\begin{center}
+\textbf{Developer $\rightarrow$ GitHub $\rightarrow$ TeamCity $\rightarrow$ Vercel $\rightarrow$ End User}
+\end{center}
+
+\section{Stage-by-Stage Explanation}
+\subsection{Developer}
+Developers implement features or bug fixes in local branches, test changes, and commit code with descriptive messages.
+
+\subsection{GitHub}
+Pushed commits are stored in the shared repository. Pull requests and branch merges maintain collaboration discipline.
+
+\subsection{TeamCity}
+TeamCity detects repository changes and runs CI builds. Build outcomes provide immediate feedback on integration quality.
+
+\subsection{Vercel}
+Once code is validated and merged, Vercel deploys the latest version to hosting infrastructure.
+
+\subsection{End User}
+Users access the most recent stable version of Resumind through the deployed web URL.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox[c][5cm][c]{0.9\textwidth}{
+    \centering
+    \textbf{Workflow Diagram Placeholder}\\[0.2cm]
+    Developer $\rightarrow$ GitHub Commit/Push $\rightarrow$ TeamCity Build\\
+    $\rightarrow$ Vercel Deployment $\rightarrow$ End User Access
+    }}
+    \caption{End-to-end SCM and CI/CD workflow}
+    \label{fig:workflow}
+\end{figure}
+
+% -----------------------
+\chapter{Advantages of Using SCM and CI}
+\section{Automation}
+CI automatically validates code changes, reducing repetitive manual build checks.
+
+\section{Error Detection}
+Build failures are detected early during integration, preventing unstable code from reaching production.
+
+\section{Version Tracking}
+Git history provides complete traceability, enabling safe rollbacks and auditability.
+
+\section{Collaboration}
+Branching and merging workflows allow multiple team members to contribute in parallel with controlled integration.
+
+% -----------------------
+\chapter{Challenges Faced}
+\section{TeamCity Setup Confusion}
+Initial setup involved uncertainty about server configuration, agent availability, and project initialization flow.
+
+\section{Docker Auto-Detection Issue}
+TeamCity auto-detected Docker-related configuration due to repository files, but the project pipeline required simple Node build steps. This caused early misconfiguration until manual steps were enforced.
+
+\section{Build Configuration Setup}
+Selecting proper working directory, node commands, and trigger settings required multiple iterations before stabilizing.
+
+\section{Debugging Build Errors}
+A few builds failed due to dependency or syntax-level issues. Log analysis and incremental fixes were required to restore successful pipeline execution.
+
+% -----------------------
+\chapter{Future Enhancements}
+\section{Multi-Page Resume Support}
+Current resume preview can be extended to support full multi-page visualization and page-wise analysis.
+
+\section{Better AI Models}
+More advanced and domain-specific AI models can improve recommendation quality and role matching accuracy.
+
+\section{Backend Migration}
+The architecture can be migrated to a dedicated backend service for enhanced control, analytics, and enterprise security policies.
+
+\section{CI/CD Pipeline Improvements}
+Future improvements include:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Adding automated test suites in TeamCity.
+    \item Introducing lint and static analysis quality gates.
+    \item Enabling staged deployments and rollback policies.
+\end{itemize}
+
+% -----------------------
+\chapter{Conclusion}
+The AI Resume Analyzer (Resumind) project demonstrates a practical implementation of Software Configuration Management in a modern web application context. Through Git and GitHub, the team maintained structured change control, collaboration, and historical traceability. Through TeamCity integration, the project implemented automated build validation, allowing rapid and reliable feedback on every code update. Through Vercel deployment integration, the delivery process became streamlined and continuous.
+
+Overall, the project highlights that SCM and CI/CD are not optional process overheads, but foundational enablers of software quality, team productivity, and deployment confidence. The workflow established in this project is directly extensible to larger real-world engineering systems.
+
+% -----------------------
+\chapter{References}
+\begin{enumerate}[leftmargin=1.2cm]
+    \item GitHub Documentation. \url{https://docs.github.com/}
+    \item JetBrains TeamCity Documentation. \url{https://www.jetbrains.com/help/teamcity/}
+    \item Vercel Documentation. \url{https://vercel.com/docs}
+    \item React Documentation. \url{https://react.dev/}
+    \item Vite Documentation. \url{https://vitejs.dev/guide/}
+    \item TypeScript Documentation. \url{https://www.typescriptlang.org/docs/}
+\end{enumerate}
+
+\end{document}
