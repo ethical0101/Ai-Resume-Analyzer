@@ -4,6 +4,9 @@
   <a href="https://ai-resume-analyzer-136-p6pbk.puter.site/" target="_blank">
     <img alt="Live Demo" src="https://img.shields.io/badge/Live%20Demo-Online-22c55e?style=for-the-badge&logo=vercel&logoColor=white" />
   </a>
+  <img alt="Build" src="https://img.shields.io/badge/CI-passing-16a34a?style=for-the-badge&logo=githubactions&logoColor=white" />
+  <img alt="Code Quality" src="https://img.shields.io/badge/Code%20Quality-SonarQube-0ea5e9?style=for-the-badge&logo=sonarqube&logoColor=white" />
+  <img alt="Version" src="https://img.shields.io/badge/Version-1.0.0-f59e0b?style=for-the-badge" />
   <img alt="React" src="https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react&logoColor=061a2b" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript&logoColor=white" />
   <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-3-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
@@ -17,6 +20,7 @@ This README is written to clearly showcase the project for recruiters and collab
 ➡️ Live Demo: https://ai-resume-analyzer-136-p6pbk.puter.site/
 
 ## Demo Overview
+
 - Upload a PDF resume and provide optional company, job title, and job description.
 - The app converts the first page of the PDF to an image for preview.
 - The PDF is analyzed by an AI model with context from the job description.
@@ -24,6 +28,7 @@ This README is written to clearly showcase the project for recruiters and collab
 - Your previous analyses are listed so you can revisit them.
 
 ## Key Features
+
 - AI-powered resume analysis tailored to a job description
 - ATS score with positive and improvement suggestions
 - PDF to image conversion (client-side) for in-app preview
@@ -33,6 +38,7 @@ This README is written to clearly showcase the project for recruiters and collab
 - Type-safe React app using TypeScript and React Router v7
 
 ## Tech Stack
+
 - Frontend: React 19, React Router v7, TypeScript, Vite
 - State: Zustand (custom Puter store)
 - Styling: Tailwind CSS
@@ -43,6 +49,7 @@ This README is written to clearly showcase the project for recruiters and collab
 - Optional: Docker for containerized builds
 
 ## Architecture and Data Flow
+
 1. Auth and Initialization
    - The app loads Puter.js script in app/root.tsx and initializes a Zustand store (app/lib/puter.ts) to expose auth, fs, kv, ai APIs.
    - Routes redirect unauthenticated users to /auth which triggers puter.auth.signIn.
@@ -70,6 +77,7 @@ This README is written to clearly showcase the project for recruiters and collab
    - Authenticated route to delete all stored files and KV entries for a clean slate.
 
 ## Project Structure (high level)
+
 - app/
   - components/ (Navbar, FileUploader, ScoreCircle/Gauge/Badge, ATS, Summary, Details, ResumeCard, Accordion)
   - lib/
@@ -87,18 +95,22 @@ This README is written to clearly showcase the project for recruiters and collab
 - public/ – static assets (icons, images, pdf.worker)
 
 ## Data Model (Feedback JSON)
+
 The AI returns structured JSON matching this contract (excerpt from constants/AIResponseFormat):
+
 - overallScore: number (0–100)
 - ATS: { score: number; tips: { type: "good" | "improve"; tip: string }[] }
 - toneAndStyle/content/structure/skills: {
   score: number;
   tips: { type: "good" | "improve"; tip: string; explanation: string }[]
-}
+  }
 
 Records are stored in KV under resume:{uuid} with fields:
+
 - id, resumePath, imagePath, companyName, jobTitle, jobDescription, feedback
 
 ## Notable Implementation Details
+
 - SSR is disabled (react-router.config.ts sets ssr: false) to simplify using the Puter.js browser SDK and PDF.js canvas rendering.
 - Robust PDF.js worker resolution in pdf2img.ts tries Vite asset import, then public asset (/pdf.worker.min.mjs), then CDN.
 - Drop-in uploader with react-dropzone enforces .pdf and 20 MB limit.
@@ -106,7 +118,9 @@ Records are stored in KV under resume:{uuid} with fields:
 - All file URLs are object URLs created from blobs read via Puter FS.
 
 ## Getting Started
+
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Browser access to Puter.js v2 (loaded automatically from https://js.puter.com/v2/)
   - You’ll sign in via Puter’s hosted UI when hitting protected routes.
@@ -122,6 +136,7 @@ npm install
 ```bash
 npm run dev
 ```
+
 - Visit http://localhost:5173
 - You will be asked to authenticate with Puter when accessing protected routes.
 
@@ -133,10 +148,12 @@ npm run preview
 ```
 
 ## Environment and Configuration
+
 - No .env required for core functionality; Puter.js is loaded from a CDN in root.tsx.
 - If you fork and host under a subpath, ensure the PDF worker is reachable. pdf2img.ts already falls back to /pdf.worker.min.mjs and a CDN URL. You may copy public/pdf.worker.min.mjs to match your hosting path.
 
 ## Docker (optional)
+
 Build and run container:
 
 ```bash
@@ -147,6 +164,7 @@ docker run -p 3000:3000 ai-resume-analyzer
 Note: Ensure outbound access to js.puter.com from the running container or host environment for the Puter SDK.
 
 ## Usage Walkthrough
+
 1. Sign in when prompted.
 2. Go to Upload, add company/job details (optional but recommended), and drop your PDF.
 3. Click “Analyze Resume”. The app uploads your PDF, creates a preview image, saves a record, and requests AI feedback.
@@ -157,6 +175,7 @@ Note: Ensure outbound access to js.puter.com from the running container or host 
 5. Return to Home to see your history and re-open any analysis.
 
 ## Routes
+
 - / – Home (history list)
 - /upload – New analysis
 - /resume/:id – Detailed review
@@ -164,6 +183,7 @@ Note: Ensure outbound access to js.puter.com from the running container or host 
 - /wipe – Admin utility to purge data (authenticated)
 
 ## What I Built and Why It Matters
+
 - Designed a cohesive UX for job seekers to quickly validate and improve resumes.
 - Implemented a resilient client-side PDF-to-image pipeline with fallbacks for PDF.js worker delivery.
 - Built a unified data layer with Puter.js (Auth/FS/KV/AI) wrapped in a typed Zustand store for simplicity and testability.
@@ -171,19 +191,72 @@ Note: Ensure outbound access to js.puter.com from the running container or host 
 - Emphasized structured AI output to ensure reliable rendering and predictable UI logic.
 
 ## Limitations and Future Work
+
 - Only first page of the PDF is previewed; extend to multi-page previews.
 - Improve error states and retries around network and AI timeouts.
 - Add export/share of feedback (PDF/Markdown) and versioning comparisons between iterations.
 - Add role-specific prompt tuning and a library of job templates.
 - Optional server-side persistence for portability beyond Puter KV.
 
+## SCM and DevOps Architecture
+
+This repository now follows enterprise-style SCM governance while preserving existing app behavior.
+
+### Pipeline Flow
+
+Developer -> Git Hook (Husky + lint-staged) -> GitHub PR -> GitHub Actions CI -> SonarQube Scan -> Merge/Tag Release -> GitLab Mirror -> Deployment
+
+### SCM and Quality Tooling
+
+- Git hooks: Husky with a pre-commit lint gate
+- Staged file validation: lint-staged
+- Static checks: ESLint + TypeScript typecheck
+- Formatting: Prettier
+- CI: GitHub Actions workflow for lint, typecheck, and build
+- Code quality: SonarQube (`sonar-project.properties`)
+- Release governance: Semantic Versioning + tags + CHANGELOG
+
+### Branching and Git Flow Model
+
+- `main`: production branch
+- `develop`: integration branch
+- `feature/*`: feature branches from `develop`
+- `hotfix/*`: emergency fixes from `main`
+
+### GitLab Mirroring
+
+Add a second remote and push to both repositories:
+
+```bash
+git remote add gitlab <gitlab-repository-url>
+npm run git:push:all
+```
+
+### Release Process
+
+```bash
+# Update VERSION + package.json + CHANGELOG.md
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin --tags
+```
+
+### Documentation Index
+
+- `CONTRIBUTING.md`: branch, PR, and release workflow
+- `CHANGELOG.md`: release history
+- `VERSION`: current release version
+- `SCM_DEVOPS_PRESENTATION_GUIDE.md`: step-by-step presentation guide
+
 ## Contributing
-- Fork the repo and open a PR. For larger features, please open an issue to discuss first.
+
+- Please follow `CONTRIBUTING.md` for branch naming, PR process, git-flow usage, and release rules.
 
 ## License
+
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgments
+
 - PDF.js for rendering
 - Puter.js for a unified Auth/FS/KV/AI SDK
 - React Router team for the modern app framework
