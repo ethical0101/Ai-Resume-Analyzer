@@ -1,7 +1,7 @@
 # AI Resume Analyzer (Resumind)
 
 <p align="left">
-  <a href="https://ai-resume-analyzer-136-p6pbk.puter.site/" target="_blank">
+  <a href="https://ai-resume-analyzer-nine-opal.vercel.app/" target="_blank">
     <img alt="Live Demo" src="https://img.shields.io/badge/Live%20Demo-Online-22c55e?style=for-the-badge&logo=vercel&logoColor=white" />
   </a>
   <img alt="React" src="https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react&logoColor=061a2b" />
