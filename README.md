@@ -14,7 +14,7 @@ An end-to-end web app that analyzes resumes against a target job using AI, provi
 
 This README is written to clearly showcase the project for recruiters and collaborators. It covers what the app does, how it’s built, and how to run and deploy it.
 
-➡️ Live Demo: https://ai-resume-analyzer-136-p6pbk.puter.site/
+➡️ Live Demo: [https://ai-resume-analyzer-136-p6pbk.puter.site/](https://ai-resume-analyzer-nine-opal.vercel.app/)
 
 ## Demo Overview
 - Upload a PDF resume and provide optional company, job title, and job description.
