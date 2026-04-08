@@ -39,6 +39,15 @@
     tabsize=2
 }
 
+% Reusable block for direct screenshot insertion from screenshots/*.jpeg.
+\newcommand{\screenshotentry}[3][0.92\textwidth]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#1]{screenshots/#2.jpeg}
+    \caption{#3}
+\end{figure}
+}
+
 \begin{document}
 
 % -----------------------
@@ -59,7 +68,7 @@
     {\large
     Kommi Druthendra (Reg No: 23MIS0213) \\
     Pothuru Jaswanth (Reg No: 23MIS0178) \\
-    Kaswibhatala Navyatha Simha (Reg No: 23MIS0242)
+    Kasibhatala Navyatha Simha (Reg No: 23MIS0242)
     \par}
 
     \vspace{1.2cm}
@@ -202,17 +211,11 @@ The AI pipeline follows this sequence:
     \item Parse structured response.
     \item Store and display categorized feedback.
 \end{enumerate}
+\section{Architecture Diagram}
 
-\section{Architecture Diagram (Placeholder)}
 \begin{figure}[H]
     \centering
-    \fbox{\parbox[c][7cm][c]{0.9\textwidth}{
-    \centering
-    \textbf{Architecture Diagram Placeholder}\\[0.3cm]
-    Include a block diagram showing:\\
-    User Browser $\rightarrow$ React+Vite Frontend $\rightarrow$ Puter.js Services\\
-    (Auth, FS, KV, AI) $\rightarrow$ Result Rendering and Storage.
-    }}
+    \includegraphics[width=0.95\textwidth]{architecture.png}
     \caption{High-level system architecture of AI Resume Analyzer (Resumind)}
     \label{fig:architecture}
 \end{figure}
@@ -418,15 +421,86 @@ Users access the most recent stable version of Resumind through the deployed web
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox[c][5cm][c]{0.9\textwidth}{
-    \centering
-    \textbf{Workflow Diagram Placeholder}\\[0.2cm]
-    Developer $\rightarrow$ GitHub Commit/Push $\rightarrow$ TeamCity Build\\
-    $\rightarrow$ Vercel Deployment $\rightarrow$ End User Access
-    }}
+    \includegraphics[width=0.9\textwidth]{flow.png}
     \caption{End-to-end SCM and CI/CD workflow}
     \label{fig:workflow}
 \end{figure}
+
+% -----------------------
+\chapter{Screenshot's}
+\section{How to Use This Section}
+Place all screenshots in the \texttt{screenshots/} folder using the exact file names listed below with \texttt{.jpeg} extension.
+
+\section{Project Screenshots (Application UI and Features)}
+\screenshotentry{ss_architecture_diagram}{Project screenshot: Architecture diagram}
+
+\screenshotentry{ss_ui_landing_home}{Project screenshot: Landing/Home page}
+
+\screenshotentry{ss_ui_auth_login}{Project screenshot: Authentication page}
+
+\screenshotentry{ss_ui_resume_upload}{Project screenshot: Resume upload interface}
+
+\screenshotentry{ss_ui_job_description_input}{Project screenshot: Job description input form}
+
+\screenshotentry{ss_ui_analysis_result_overview}{Project screenshot: Analysis result overview}
+
+\screenshotentry{ss_ui_ats_score}{Project screenshot: ATS scoring panel}
+
+\screenshotentry{ss_ui_detailed_feedback}{Project screenshot: Detailed feedback view}
+
+\screenshotentry{ss_ui_resume_history}{Project screenshot: Resume history listing}
+
+\screenshotentry{ss_workflow_end_to_end}{Project screenshot: End-to-end workflow diagram}
+
+\section{GitHub and SCM Evidence Screenshots}
+\screenshotentry{ss_scm_repo_root}{SCM evidence: GitHub repository overview}
+
+\screenshotentry{ss_scm_branches}{SCM evidence: Branching strategy view}
+
+\screenshotentry{ss_scm_commit_history}{SCM evidence: Commit timeline}
+
+\screenshotentry{ss_scm_merge_pr}{SCM evidence: Merge and collaboration proof}
+
+\section{TeamCity Screenshots (Very Important)}
+\screenshotentry{ss_tc_login_dashboard}{TeamCity screenshot: Access and dashboard}
+
+\screenshotentry{ss_tc_project_creation}{TeamCity screenshot: Project creation setup}
+
+\screenshotentry{ss_tc_vcs_root_config}{TeamCity screenshot: VCS root configuration}
+
+\screenshotentry{ss_tc_build_config}{TeamCity screenshot: Build configuration}
+
+\screenshotentry{ss_tc_build_steps}{TeamCity screenshot: Build steps}
+
+\screenshotentry{ss_tc_triggers}{TeamCity screenshot: Trigger settings}
+
+\screenshotentry{ss_tc_build_queue_running}{TeamCity screenshot: Build execution in progress}
+
+\screenshotentry{ss_tc_build_log_success}{TeamCity screenshot: Successful build log}
+
+\screenshotentry{ss_tc_build_failure}{TeamCity screenshot: Failure detection}
+
+\screenshotentry{ss_tc_failure_log_detail}{TeamCity screenshot: Failure log detail}
+
+\screenshotentry{ss_tc_fix_and_rebuild}{TeamCity screenshot: Fix and rebuild proof}
+
+\section{Deployment and CD Evidence Screenshots}
+\screenshotentry{ss_cd_vercel_project}{CD evidence: Vercel project setup}
+
+\screenshotentry{ss_cd_vercel_deployment_log}{CD evidence: Deployment execution log}
+
+\screenshotentry{ss_cd_live_application}{CD evidence: Production deployment proof}
+
+\section{Small but Important Supporting Screenshots}
+\screenshotentry{ss_small_teamcity_agent_status}{Supporting evidence: TeamCity agent availability}
+
+\screenshotentry{ss_small_teamcity_build_history}{Supporting evidence: Build history snapshot}
+
+\screenshotentry{ss_small_github_webhook_integration}{Supporting evidence: GitHub integration detail}
+
+\screenshotentry{ss_small_vercel_auto_deploy_setting}{Supporting evidence: Auto deployment configuration}
+
+\screenshotentry{ss_small_final_end_to_end_proof}{Supporting evidence: End-to-end verification}
 
 % -----------------------
 \chapter{Advantages of Using SCM and CI}
