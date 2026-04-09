@@ -13,9 +13,9 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "prepare": "husky",
-    "preview": "react-router-serve ./build/server/index.js",
+    "preview": "serve -s build/client -l 4173",
     "sonar": "sonar-scanner",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "npm run build && serve -s build/client -l 3000",
     "typecheck": "react-router typegen && tsc"
   },
   "lint-staged": {
@@ -37,6 +37,7 @@
     "react-dom": "^19.1.0",
     "react-dropzone": "^14.3.8",
     "react-router": "^7.7.1",
+    "serve": "^14.2.5",
     "tailwind-merge": "^3.3.1",
     "zustand": "^5.0.8"
   },
@@ -54,6 +55,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
+    "serve": "^14.2.6",
     "sonar-scanner": "^3.1.0",
     "tailwindcss": "^4.1.4",
     "tw-animate-css": "^1.3.8",
