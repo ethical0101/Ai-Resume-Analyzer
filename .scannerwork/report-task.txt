@@ -1,0 +1,6 @@
+projectKey=ai-resume-analyzer
+serverUrl=http://localhost:9000
+serverVersion=26.3.0.120487
+dashboardUrl=http://localhost:9000/dashboard?id=ai-resume-analyzer
+ceTaskId=6ebe463d-c490-493e-bee2-bfeaf757eafc
+ceTaskUrl=http://localhost:9000/api/ce/task?id=6ebe463d-c490-493e-bee2-bfeaf757eafc

@@ -144,8 +144,12 @@ npm run dev
 
 ```bash
 npm run build
+npm start
 npm run preview
 ```
+
+- `npm start` builds the SPA and serves it from `build/client` on port 3000.
+- `npm run preview` serves the existing build on port 4173.
 
 ## Environment and Configuration
 
